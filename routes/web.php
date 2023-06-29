@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\SaludoController;
+use App\Http\Controllers\AlumnoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,24 +14,43 @@ use App\Http\Controllers\MainController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
+
+
 */
 
-Route::get('/',[MainController::class,"index"]);
+
+Route::get('/', function () {
+    return view('main');
+})->name("main");
 
 
-Route::get("prueba", function () {
-    return view("prueba");
+
+Route::view("about","nav.about")->name("about");
+Route::resource("alumnos", AlumnoController::class);
+
+
+//Route::get("alumnos",[\App\Http\Controllers\AlumnosControler::class,"index"])
+//    ->name("alumnos")
+//    ->middleware("auth");;
+Route::view("proyectos","nav.proyectos")
+    ->name("proyectos")
+    ->middleware("auth");
+
+Route::view("contacta","nav.contacta")
+    ->name("contacta");
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get("about", fn() => view("about"));
-Route::view("contact", "contacta")->name("contacta");
-Route::view("proyectos", "proyectos");
-Route::get("alumnos/{numero}", fn($num) => "<h1>Valor del almuno $num</h1>")
-    ->where("numero", "[0-9]*");
 
-Route::fallback(function () {
-    $ruta = request()->getRequestUri();
-    return "<h1>La ruta $ruta no existe</h1> ";
+require __DIR__.'/auth.php';
 
-
-});
 

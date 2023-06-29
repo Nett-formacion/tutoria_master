@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Estoy en prueba</h1>
+<h1>Saludando desde laravel  {{$num}} </h1>
+
 </body>
 </html>
