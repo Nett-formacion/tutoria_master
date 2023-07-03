@@ -2,7 +2,7 @@
 
 <div class=" flex flex-col justify-center items-center">
     <h1 class=" text-4xl text-green-700">Datos nuevo alumno</h1>
-    <form action="{{route("alumnos.update",$alumno->id)}}" method="post" class="space-y-4">
+    <form action="{{route("alumnos.update",[$alumno->id,'page'=>$page])}}" method="post" class="space-y-4">
         @method("PUT")
         @csrf
         <div>

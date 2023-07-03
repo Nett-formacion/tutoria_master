@@ -8,10 +8,11 @@
     <meta name="description"
           content=" {{$metaDescription ?? "Información de proyectos de alumnos NettFormacion master en desarrollo web"}}">
     <title>{{$title??"Proyectos"}}</title>
-    @vite("./resources/css/app.css")
+    @vite(["./resources/css/app.css","./resources/js/app.js" ])
 </head>
 
 <body>
+<div id="app">
     <x-layout.header  class="h-15hv" nombre="pedro"/>
     <x-layout.nav class="h-5hv" nombre="navegador"/>
 
@@ -21,5 +22,6 @@
         {{$slot}}
     </main>
     <x-layout.footer class="h-5hv"/>
+</div>
 </body>
 </html>

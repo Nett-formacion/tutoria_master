@@ -1,7 +1,14 @@
-import './bootstrap';
+import {creatApp} from 'vue/dist/vue.esm-browser.js';
 
-import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+creatApp( {
 
-Alpine.start();
+components:{
+    cronometro,
+}
+
+
+
+
+}).mount("#app")
+

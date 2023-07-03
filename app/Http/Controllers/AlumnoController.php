@@ -6,6 +6,8 @@ use App\Models\Alumno;
 use App\Http\Requests\StoreAlumnoRequest;
 use App\Http\Requests\UpdateAlumnoRequest;
 
+use Illuminate\Support\Facades\Request;
+
 class AlumnoController extends Controller
 {
     /**
@@ -13,8 +15,9 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::all();
-        return view("alumnos.listado", ["alumnos"=>$alumnos]);
+        $alumnos = Alumno::paginate(5);
+        $page = Request::get('page')??1;
+        return view("alumnos.listado", compact("alumnos","page"));
         //
     }
 
@@ -23,7 +26,8 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view("alumnos.create");
+        $page = Request::get('page');
+        return view("alumnos.create",compact('page'));
         //
     }
 
@@ -32,9 +36,11 @@ class AlumnoController extends Controller
      */
     public function store(StoreAlumnoRequest $request)
     {
+
+        $page = Request::get('page');
         $alumno = new Alumno($request->input());
         $alumno->saveOrFail();
-        return redirect(route('alumnos.index'));
+        return redirect(route('alumnos.index',compact("page")));
         //
     }
 
@@ -52,7 +58,8 @@ class AlumnoController extends Controller
     public function edit(Alumno $alumno)
     {
         //
-        return view ("alumnos.edit", compact("alumno"));
+        $page=Request::get('page');
+        return view ("alumnos.edit", compact("alumno","page"));
     }
 
     /**
@@ -61,6 +68,10 @@ class AlumnoController extends Controller
     public function update(UpdateAlumnoRequest $request, Alumno $alumno)
     {
         //
+        $page = Request::get("page");
+        $nuevos_datos_alumno = $request->input();
+        $alumno->update($nuevos_datos_alumno);
+        return redirect (route("alumnos.index",['page'=>$page]));
     }
 
     /**
@@ -68,6 +79,13 @@ class AlumnoController extends Controller
      */
     public function destroy(Alumno $alumno)
     {
+        $alumno->delete();
+        return back();
+//        return redirect (route("alumnos.index"));
+
+
+
+
         //
     }
 }

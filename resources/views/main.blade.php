@@ -4,6 +4,18 @@
     <div class="card w-full h-full bg-base-100 shadow-xl image-full">
         <figure><img src="{{asset('/images/gestion_proyectos_optimizado.png')}}" alt="Proyectos" /></figure>
         <div class="card-body">
+            <h2 class="card-title">cronómetro</h2>
+            <p>Gestión de un cronómetro</p>
+            <cronometro />
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">Verlos ahora(requiere registro)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card w-full h-full bg-base-100 shadow-xl image-full">
+        <figure><img src="{{asset('/images/gestion_proyectos_optimizado.png')}}" alt="Proyectos" /></figure>
+        <div class="card-body">
             <h2 class="card-title">Gestión de proyectos</h2>
             <p>Consulta proyectos de los alumnos</p>
             <div class="card-actions justify-end">
