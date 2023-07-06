@@ -1,14 +1,15 @@
-import {creatApp} from 'vue/dist/vue.esm-browser.js';
+
+import {createApp} from 'vue';
+import cronometro from "./components/cronometro.vue";
+import listadoTabla from "./components/listadoTabla.vue";
 
 
-creatApp( {
+createApp( {
+    components:{
+        cronometro,
+        listadoTabla,
 
-components:{
-    cronometro,
-}
-
-
-
+    }
 
 }).mount("#app")
 

@@ -15,9 +15,17 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::paginate(5);
+//        $alumnos = Alumno::paginate(5);
+        $filas= Alumno::all();
+        $campos = (new Alumno)->getFillable();
+        $clave = (new Alumno)->getKeyName();
+
+        $campos = array_merge([$clave], $campos);
+        $nombre_tabla="Alumnos";
+
+
         $page = Request::get('page')??1;
-        return view("alumnos.listado", compact("alumnos","page"));
+        return view("alumnos.listado", compact("filas","campos", "nombre_tabla"));
         //
     }
 
@@ -36,7 +44,6 @@ class AlumnoController extends Controller
      */
     public function store(StoreAlumnoRequest $request)
     {
-
         $page = Request::get('page');
         $alumno = new Alumno($request->input());
         $alumno->saveOrFail();
@@ -80,7 +87,10 @@ class AlumnoController extends Controller
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
-        return back();
+        $alumnos = Alumno::all();
+        logger ($alumnos);
+        return response()->json($alumnos);
+
 //        return redirect (route("alumnos.index"));
 
 

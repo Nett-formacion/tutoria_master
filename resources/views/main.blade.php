@@ -2,11 +2,12 @@
     title="Proyectos Master" meta-description="Proyectos de alumnos del master desarrollo web fullstak en  Nettformación promoción 2022">
 <div class="flex flex-col justify-between m-2 space-y-2  overflow-auto">
     <div class="card w-full h-full bg-base-100 shadow-xl image-full">
-        <figure><img src="{{asset('/images/gestion_proyectos_optimizado.png')}}" alt="Proyectos" /></figure>
+        <figure><img src="{{asset('/images/cronometro.png')}}" alt="Proyectos" /></figure>
         <div class="card-body">
             <h2 class="card-title">cronómetro</h2>
             <p>Gestión de un cronómetro</p>
-            <cronometro />
+            <cronometro nombre="Manuel"> </cronometro>
+
             <div class="card-actions justify-end">
                 <button class="btn btn-primary">Verlos ahora(requiere registro)</button>
             </div>

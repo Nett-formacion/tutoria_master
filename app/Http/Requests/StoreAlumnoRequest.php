@@ -22,7 +22,7 @@ class StoreAlumnoRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'nombre'=>'required|size:5',
+                'nombre'=>'required|min:5',
                 'email'=>'email',
                 'edad'=>'integer|min:2'
         ];

@@ -14,10 +14,14 @@
     @guest
         <form action="login" method="post">
             @csrf
-            <input type="text" name="email" placeholder="email">
-            <input type="password" name="password" placeholder="password">
-            <x-primary-button class="mt-2" >Login</x-primary-button>
-            <x-a-button href="register"> Register</x-a-button>
+            <div class="space-x-2 ">
+                <input class ="input  text-xs" type="text" name="email" placeholder="email">
+                <input  class ="input  text-xs" type="password" name="password" placeholder="password">
+            </div>
+            <div class="space-x-3">
+                <x-primary-button class="mt-2">Login</x-primary-button>
+                <x-a-button href="register"> Register</x-a-button>
+            </div>
         </form>
 
     @endguest
