@@ -10,19 +10,27 @@ use Illuminate\Support\Facades\Request;
 
 class AlumnoController extends Controller
 {
+
+    public function get_paginate(){
+        $alumnos = Alumno::paginate(10);
+        logger("-$alumnos-");
+
+        $page = Request::get('page');
+        logger("-$page-");
+        return response($alumnos);
+
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-//        $alumnos = Alumno::paginate(5);
-        $filas= Alumno::all();
+        $filas = Alumno::paginate(10);
         $campos = (new Alumno)->getFillable();
         $clave = (new Alumno)->getKeyName();
 
         $campos = array_merge([$clave], $campos);
         $nombre_tabla="Alumnos";
-
 
         $page = Request::get('page')??1;
         return view("alumnos.listado", compact("filas","campos", "nombre_tabla"));
@@ -87,8 +95,8 @@ class AlumnoController extends Controller
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
-        $alumnos = Alumno::all();
-        logger ($alumnos);
+
+        $alumnos = Alumno::paginate(10);
         return response()->json($alumnos);
 
 //        return redirect (route("alumnos.index"));

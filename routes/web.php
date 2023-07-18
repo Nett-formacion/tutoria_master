@@ -24,7 +24,7 @@ Route::get('/', function () {
 })->name("main");
 
 
-
+Route::get("alumnos/paginate",[AlumnoController::class ,'get_paginate']);
 Route::view("about","nav.about")->name("about");
 Route::resource("alumnos", AlumnoController::class);
 
